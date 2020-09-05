@@ -22,6 +22,9 @@ const appendEs6 = (parent, el) => parent.appendChild(el);
 const ul = document.getElementById('authors'); //Get the list where we will place our authors
 const url = 'https://randomuser.me/api/?results=10'; // Get 10 random users
 
+const ulcode = document.getElementById('authors'); //Get the list where we will place our authors
+const urlcode = 'https://randomuser.me/api/?results=10'; // Get 10 random users
+
 fetch(url)
 .then((response) => response.json()) //Transform the fetched data into json format
 .then(function(data){
@@ -39,6 +42,29 @@ fetch(url)
         append(ul,li);
 
     })
+})
+.catch(function(error){
+    console.log
+});
+
+fetch(urlcode)
+.then((response) => response.json()) //Transform the fetched data into json format
+.then(function(data){
+    
+    let code = data.results; //get the results
+    return code.map(function(code){
+        //create the elenements we need
+        let li = createNode('li'),
+        p = createNode('p'),
+        span = createNode('span');
+        span.innerHTML = `${code.name.first} ${code.name.last}`; // Make the HTML of our span to be the first and last name of our author
+        // Append all our elements
+        append(li, p); 
+        append(li,span);
+        append(ul,li);
+
+    })
+    
 })
 .catch(function(error){
     console.log
